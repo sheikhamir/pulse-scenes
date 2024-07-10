@@ -3,43 +3,45 @@
   height: 100%;
 }
 
-.slider-container .control.vertical {
-  height: 350px;
-}
+/*.slider-container .control .vertical {*/
+/*  height: 350px;*/
+/*}*/
 
-.slider.vertical {
-  -webkit-appearance: slider-vertical;
-  -moz-appearance: slider-vertical;
-  appearance: slider-vertical;
-  width: auto;
-  height: auto;
-}
+/*.slider.vertical {*/
+/*  -webkit-appearance: slider-vertical;*/
+/*  -moz-appearance: slider-vertical;*/
+/*  appearance: slider-vertical;*/
+/*  width: auto;*/
+/*  height: auto;*/
+/*}*/
 
 .control {
   overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 .fader {
   position: relative;
   /*border: 1px solid red;*/
-  display: inline-flex;
-  width: 350px;
-  height: 40px;
+  display: block;
+  width: 100%;
+  height: 100%;
   /*background: red;*/
   /*transform: rotate(-90deg);*/
 }
 
-.fader.vertical {
-  transform: rotate(-90deg);
-  top: calc(350px / 2 - 19px);
-  /*left: calc(-350px / 3 + (36px / 4));*/
-  left: -155px;
-}
+/*.fader.vertical {*/
+/*  transform: rotate(-90deg);*/
+/*  top: calc(350px / 2 - 19px);*/
+/*  !*left: calc(-350px / 3 + (36px / 4));*!*/
+/*  left: -155px;*/
+/*}*/
 
-.more .fader.vertical {
-  top: calc(350px / 2 - 18px);
-  left: calc(-350px / 2 + 50%);
-}
+/*.more .fader.vertical {*/
+/*  top: calc(350px / 2 - 18px);*/
+/*  left: calc(-350px / 2 + 50%);*/
+/*}*/
 
 .range {
   width: 100%;
@@ -50,17 +52,20 @@
   border: 1px solid #060606;
   overflow: hidden;
   outline: none;
-  border-radius: 20px;
+  /*border-radius: 20px;*/
   box-shadow: inset 0 0 5px #060606;
+  display: flex;
 }
 
 .range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 40px;
-  height: 40px;
+  width: 10px;
+  height: 10px;
+  min-height: 100%;
+  /*aspect-ratio: 1/1;*/
   border-radius: 100%;
-  background: #e1e1e1;
-  border: 1px solid #e1e1e1;
+  background: red;
+  border: 1px solid green;
   position: relative;
   box-shadow: -415px 0 0 400px var(--theme-main);
 }
@@ -85,6 +90,11 @@
   margin-bottom: 15px;
   min-width: 105px;
   width: fit-content;
+}
+
+.label.no-meter {
+  left: 20px;
+  transform: translateX(-50%);
 }
 
 .level {

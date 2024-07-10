@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'admin';
+  title = 'pulse-control-server';
+
+  gotFocus($event: any) {
+    console.log($event);
+  }
 }

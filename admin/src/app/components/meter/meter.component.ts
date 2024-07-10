@@ -18,8 +18,17 @@ export class MeterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  percentage(value: any, max: number): number {
+  percentage(value: any): number {
+    const min = this.item.min;
+    const max = <number>this.item.max;
     return (parseInt(value) / max * 100);
+  }
+
+  getStyle() {
+    let style = '';
+    // Adds the additional css
+    style += this.item.css; // Commented - to be reviewed
+    return style;
   }
 
 }

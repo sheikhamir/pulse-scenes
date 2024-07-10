@@ -1,7 +1,12 @@
 export interface Page {
-  id?: number;
+  id: number;
   title: string;
-  active: boolean;
-  slug?: string;
-  icon?: string;
+  slug: string;
+  icon: string;
+  active?: string;
+}
+
+export interface Config {
+  key: string;
+  value: string;
 }

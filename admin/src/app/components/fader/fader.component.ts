@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Controller } from "src/interfaces/Controller";
+import { Fader } from "src/interfaces/Controller";
 
 @Component({
   selector: 'app-fader',
@@ -7,7 +7,7 @@ import { Controller } from "src/interfaces/Controller";
   styleUrls: ['./fader.component.css']
 })
 export class FaderComponent implements OnInit {
-  @Input() item!: Controller;
+  @Input() item!: Fader;
   value: number = 0;
 
   // This will be sent to the parent
@@ -28,7 +28,7 @@ export class FaderComponent implements OnInit {
   }
 
   // Runs when the slider is changed
-  input(event: any, item: Controller) {
+  input(event: any, item: Fader) {
     this.change.emit({handle: item.handle, value: event.target.value, item: item, event: event})
   }
 

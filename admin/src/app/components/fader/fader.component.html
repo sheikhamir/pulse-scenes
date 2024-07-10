@@ -1,6 +1,6 @@
 <ng-container *ngIf="item">
   <div class="slider-container" [ngClass]="{'vertica': item.vertical, 'more': item.more}">
-    <div class="label" [ngClass]="{'top': item.vertical}" *ngIf="item.labelPosition && item.labelPosition !== 'none' && item.labelPosition === 'top'">
+    <div class="label" [ngClass]="{'top': item.vertical, 'no-meter': item.noMeter}" *ngIf="item.labelPosition && item.labelPosition !== 'none' && item.labelPosition === 'top'">
       {{ item.label }} {{ item.type === 'meter' ? '(meter)' : ''}}
     </div>
     <div class="control" [ngClass]="{'vertical': item.vertical}">
@@ -12,7 +12,7 @@
     <div class="level" *ngIf="item.showPercentage">
       {{ percentage(item.current_value) + '%' }}
     </div>
-    <div class="label" [ngClass]="{'bottom': item.labelPosition && item.labelPosition === 'bottom'}" *ngIf="item.labelPosition && item.labelPosition !== 'none' && item.labelPosition === 'bottom'">
+    <div class="label" [ngClass]="{'bottom': item.labelPosition && item.labelPosition === 'bottom', 'no-meter': item.noMeter}" *ngIf="item.labelPosition && item.labelPosition !== 'none' && item.labelPosition === 'bottom'">
       {{ item.label }} {{ item.type === 'meter' ? '(meter)' : ''}}
     </div>
   </div>

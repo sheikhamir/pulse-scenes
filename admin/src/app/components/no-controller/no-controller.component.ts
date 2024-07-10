@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-no-controller',
@@ -10,6 +10,10 @@ export class NoControllerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  createComponent(event: Event, type: string) {
+
   }
 
 }

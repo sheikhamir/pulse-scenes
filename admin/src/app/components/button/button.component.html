@@ -1,1 +1,1 @@
-<button [ngClass]="{'active': active}" (click)="clicked($event, item)" title="{{ item.label }}">{{ item.label }}</button>
+<button [ngClass]="{'active': active}" [style]="getStyle()" (click)="clicked($event, item)" title="{{ item.label }}">{{ item.label }}</button>
