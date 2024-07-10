@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  bridge-symetrix:
+    restart: always
+    build:
+      context: ./bridge
+      args:
+        TAG: v1
+    command: "80 192.168.2.37:48631"
+    ports:
+      - "8300:80"
+  bridge-biamp:
+    restart: always
+    build:
+      context: ./bridge
+      args:
+        TAG: v1
+    command: "80 192.168.2.38:21"
+    ports:
+      - "8301:80"
+  backend:
+    restart: always
+    build:
+      context: ./backend
+      args:
+        TAG: v1
+    ports:
+      - "8000:80"
+  frontend:
+    restart: always
+    build:
+      context: ./frontend
+      args:
+        TAG: v1
+    ports:
+      - "8200:80"
+  admin:
+    restart: always
+    build:
+      context: ./admin-v2
+      args:
+        TAG: v1
+    ports:
+      - "9000:80"
+  wrapper:
+    restart: always
+    build:
+      context: ./wrapper
+      args:
+        TAG: v1
+    ports:
+      - "8201:80"
+#  mysql:
+#    image: mysql:8.0  # Use the official MySQL image
+#    environment:
+#      MYSQL_DATABASE: pulse-prism
+#      MYSQL_USERNAME: pulse-prism
+#      MYSQL_PASSWORD: m8t24eslup
+#      MYSQL_ROOT_PASSWORD: m8t24eslup  # Set a strong password
+#    ports:
+#      - "33061:3306"

@@ -1,0 +1,17 @@
+<div class="container vh100">
+    <div class="sidenav">
+        <div class="control">
+            <button class="add-btn" title="Add a new page" (click)="showAddPageForm = !showAddPageForm">Add New</button>
+        </div>
+        <a href="#" [routerLink]="" *ngFor="let page of pages" (click)="selectPage(page)" (contextmenu)="openContextMenu($event, page)" [ngClass]="{'active': selectedPage.slug && selectedPage.slug === page.slug, 'contextMenu': rightClickedPage.slug && rightClickedPage.slug === page.slug}">{{ page.title }}</a>
+    </div>
+    <div class="page-setting">
+        <div *ngIf="!selectedPage">
+          This is page setting
+        </div>
+      <div *ngIf="selectedPage">
+        You have selected "{{ selectedPage.title }}"
+      </div>
+    </div>
+</div>
+<app-add-page-form [showForm]="showAddPageForm" (submitForm)="onFormSubmit($event)" (closeForm)="onFormClose()"></app-add-page-form>

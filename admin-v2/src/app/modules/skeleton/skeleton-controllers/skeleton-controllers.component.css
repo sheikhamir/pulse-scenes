@@ -1,0 +1,47 @@
+div {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  width: calc(100% / 6);
+  padding: 10px;
+  /*animation: skeleton-loading .3s linear infinite alternate;*/
+  opacity: 0;
+}
+
+/**:active {*/
+/*  box-shadow: none;*/
+/*  outline: none;*/
+/*}*/
+
+div > .frame {
+  background: #024264;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+div > .frame:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-100%);
+  background-image: linear-gradient(to left, transparent, rgba(190,190,190,.1), transparent);
+  animation: skeleton-inside .5s infinite linear;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes skeleton-inside {
+  100% {
+    transform: translateX(100%);
+  }
+}

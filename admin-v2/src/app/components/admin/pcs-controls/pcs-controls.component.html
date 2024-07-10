@@ -1,0 +1,282 @@
+<div class="pcs-controls-container float" cdkDrag>
+  <div class="pcs-controls-drag-handle" cdkDragHandle>
+    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+    </svg>
+  </div>
+  <!--<button class="btn configure-btn">
+    <span class="material-symbols-outlined">settings</span>
+  </button>-->
+  <a class="cursor-pointer pcs-control-btn" *ngIf="!selected" (click)="showControllerEditForm()">
+    <span class="material-symbols-outlined">add_circle</span>
+  </a>
+  <a class="cursor-pointer pcs-control-btn css-icon" *ngIf="!selected" (click)="showPageCSSForm()">
+    <span class="material-symbols-outlined">css</span>
+  </a>
+<!--  <app-image-form *ngIf="selected && selected.type === 'image'" [item]="selected"></app-image-form>-->
+<!--  <app-fader-form *ngIf="selected && selected.type === 'fader'"></app-fader-form>-->
+<!--  <app-icon-form *ngIf="selected && selected.type === 'icon'"></app-icon-form>-->
+<!--  <app-image-form *ngIf="selected && selected.type === 'image'"></app-image-form>-->
+<!--  <app-label-form *ngIf="selected && selected.type === 'label'"></app-label-form>-->
+<!--  <app-meter-form *ngIf="selected && selected.type === 'meter'"></app-meter-form>-->
+  <!-- A CSS edit form for page -->
+  <form (ngSubmit)="onCSSSubmit()" *ngIf="showCssForm && pageCSS && !selected">
+    <h2 class="center">Edit CSS</h2>
+    <table class="table-form">
+      <tbody>
+      <!--  Page CSS  -->
+      <tr class="form-group">
+        <td valign="top">
+          <textarea class="form-control" id="page-css" name="page-css" [(ngModel)]="pageCSS.css" (ngModelChange)="onChangeCSS()" rows="20"></textarea>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="text-right">
+          <button type="submit" class="btn">Done</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </form>
+  <!--  A form to edit selection -->
+  <form (ngSubmit)="onSubmit()" *ngIf="selected">
+    <h2>Edit Item</h2>
+    <table class="table-form">
+      <tbody>
+      <!--  Item Type  -->
+      <tr class="form-group">
+        <td><label for="item-type">Item Type</label></td>
+        <td><select class="form-control" id="item-type" name="item-type" [(ngModel)]="selected.type" (ngModelChange)="onChange(0)">
+          <option value="label">Label</option>
+          <option value="fader">Fader</option>
+          <option value="meter">Meter</option>
+          <option value="button">Button</option>
+          <option value="page">Page Navigation</option>
+          <option value="image">Image</option>
+          <!--<option value="text">Text</option>-->
+        </select></td>
+      </tr>
+      <!--  Item: Image. Image Src type  -->
+      <tr class="form-group" *ngIf="selected.type === 'image'">
+        <td><label for="image-src-type">Image Type</label></td>
+        <td><select class="form-control" id="image-src-type" name="image-src-type" [(ngModel)]="selected.srcType" (ngModelChange)="onChange(0)">
+          <option value="local">Local</option>
+          <option value="external">External</option>
+        </select></td>
+      </tr>
+      <!--  Item: Image. Image src  -->
+      <tr class="form-group" *ngIf="selected.type === 'image'">
+        <td><label for="image-src-value">URL</label></td>
+        <td><input type="text" class="form-control" id="image-src-value" name="image-src-value" [(ngModel)]="selected.value" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Image. Image Src type  -->
+      <tr class="form-group" *ngIf="selected.type === 'image'">
+        <td><label for="image-object-fit">Image Fit</label></td>
+        <td><select class="form-control" id="image-object-fit" name="image-object-fit" [(ngModel)]="selected.objectFit" (ngModelChange)="onChange(0)">
+          <option value="contain">Contain</option>
+          <option value="cover">Cover</option>
+          <option value="fill">Fill</option>
+          <option value="none">None</option>
+          <option value="scale-down">Scale Down</option>
+        </select></td>
+      </tr>
+
+      <!--  Item: Page. Target page  -->
+      <tr class="form-group" *ngIf="selected.type === 'page'">
+        <td><label for="target-page">Target Page</label></td>
+        <td>
+          <select class="form-control" id="target-page" name="target-page" [(ngModel)]="selected.targetPage" (ngModelChange)="onChange(0)">
+            <option value="self">Self (new page)</option>
+            <option value="/home">Home</option>
+            <option *ngFor="let page of availablePages" [value]="page.id">{{ page.label }}</option>
+          </select>
+        </td>
+      </tr>
+      <!--  Item: Page. Page title  -->
+      <tr class="form-group" *ngIf="selected.type === 'page'">
+        <td><label for="page-title">Title</label></td>
+        <td><input type="text" class="form-control" id="page-title" name="page-title" [(ngModel)]="selected.title" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Label. Label tag  -->
+      <tr class="form-group" *ngIf="selected.type === 'label'">
+        <td><label for="label-tag">Label HTML Tag</label></td>
+        <td><select class="form-control" id="label-tag" name="label-tag" [(ngModel)]="selected.tag" (ngModelChange)="onChange(0)">
+          <option value="h1">H1</option>
+          <option value="h2">H2</option>
+          <option value="h3">H3</option>
+          <option value="h4">H4</option>
+          <option value="h5">H5</option>
+          <option value="h6">H6</option>
+          <option value="p">p</option>
+        </select></td>
+      </tr>
+      <!--  Item: Label. Label value  -->
+      <tr class="form-group" *ngIf="selected.type === 'label'">
+        <td><label for="label-value">Label</label></td>
+        <td><input type="text" class="form-control" id="label-value" name="label-value" [(ngModel)]="selected.value" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Label. Text align  -->
+      <tr class="form-group" *ngIf="selected.type === 'label'">
+        <td><label for="label-text-align">Text Align</label></td>
+        <td><select class="form-control" id="label-text-align" name="label-text-align" [(ngModel)]="selected.textAlign" (ngModelChange)="onChange(0)">
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+          <option value="justify">Justify</option>
+        </select></td>
+      </tr>
+      <!--  Label Justify  -->
+      <!--<tr class="form-group" *ngIf="selected.type === 'label'">
+        <td><label for="labelJustify_updateForm">Label Justify Position</label></td>
+        <td><select class="form-control" id="labelJustify_updateForm" name="labelJustify_updateForm" [(ngModel)]="selected.labelJustify" (ngModelChange)="onChange(0)">
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+        </select></td>
+      </tr>-->
+
+      <!--  Item: Icon. Icon value  -->
+      <tr class="form-group" *ngIf="selected.type === 'icon'">
+        <td><label for="icon-value">Icon</label></td>
+        <td><input type="text" class="form-control" id="icon-value" name="icon-value" [(ngModel)]="selected.value" (ngModelChange)="onChange(0)"></td>
+      </tr>
+
+      <!--  Item: Fader, Meter, Button, Text. Handle  -->
+      <tr class="form-group" *ngIf="['fader', 'meter', 'button', 'text'].includes(selected.type)">
+        <td><label for="handle">Control Handle</label></td>
+        <td><input type="text" class="form-control" id="handle" name="handle" [(ngModel)]="selected.handle" (ngModelChange)="onChange(0)"></td>
+      </tr>
+
+      <!--  Item: Fader, Meter. Minimum value  -->
+      <tr class="form-group" *ngIf="['fader', 'meter'].includes(selected.type)">
+        <td><label for="min">Minimum value</label></td>
+        <td><input type="text" class="form-control" id="min" name="min" [(ngModel)]="selected.min" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Fader, Meter. Maximum value  -->
+      <tr class="form-group" *ngIf="['fader', 'meter'].includes(selected.type)">
+        <td><label for="max">Maximum value</label></td>
+        <td><input type="text" class="form-control" id="max" name="max" [(ngModel)]="selected.max" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Fader, Meter. Orientation  -->
+      <!--<tr class="form-group" *ngIf="['fader', 'meter'].includes(selected.type)">
+        <td><label for="vertical">Orientation</label></td>
+        <td>
+          <input type="checkbox" class="form-check-input" id="vertical" name="vertical" [(ngModel)]="selected.vertical" (ngModelChange)="onChange(0)">
+          <label class="form-check-label" for="vertical">Vertical</label>
+        </td>
+      </tr>-->
+      <!--  Orientation is done automatically through the resize  -->
+
+      <!--  Item: Button. Set value  -->
+      <tr class="form-group" *ngIf="selected.type === 'button'">
+        <td><label for="set-value">Set Value</label></td>
+        <td><input type="text" class="form-control" id="set-value" name="set-value" [(ngModel)]="selected.setValue" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Button. Toggle check  -->
+      <tr class="form-group" *ngIf="selected.type === 'button'">
+        <td><label for="toggleable">Button Type</label></td>
+        <td>
+          <input type="checkbox" class="form-check-input" id="toggleable" name="toggleable" [(ngModel)]="selected.toggle" (ngModelChange)="onChange(0)">
+          <label class="form-check-label" for="toggleable">Toggle Button</label>
+        </td>
+      </tr>
+      <!--  Item: Button. Toggle value  -->
+      <tr class="form-group" *ngIf="selected.type !== 'page' && selected.toggle === true">
+        <td><label for="toggle-value">Toggle Value</label></td>
+        <td><input type="text" class="form-control" id="toggle-value" name="toggle-value" [(ngModel)]="selected.toggleValue" (ngModelChange)="onChange(0)"></td>
+      </tr>
+
+      <!--  Item: Text. Operation  -->
+      <tr class="form-group" *ngIf="selected.type === 'text'">
+        <td>
+          <label for="operation">Operation</label>
+          <br/>
+          <div class="info">
+            <!--<span class="material-symbols-outlined">info</span>-->
+            <span class="title">Hover for info</span>
+            <div class="content">
+              Use the keyword <code>value</code> to render the value. If
+              the value is an integer, you can use this field to modify
+              the response by applying basic arithmetic operations.
+              <br/>
+              Example:
+              If you are using a Symetrix device and want to render the
+              percentage of the value, you can use this example:
+              <code>value / 65535 * 100</code>
+            </div>
+          </div>
+        </td>
+        <td>
+          <input type="text" class="form-control code" id="operation" name="operation" [(ngModel)]="selected.operation" (ngModelChange)="onChange(0)">
+        </td>
+      </tr>
+      <!--  Item: Text. Label value  -->
+      <tr class="form-group" *ngIf="selected.type === 'text'">
+        <td><label for="text-label">Label</label></td>
+        <td><input type="text" class="form-control" id="text-label" name="text-label" [(ngModel)]="selected.label" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Item: Text. Label position  -->
+      <tr class="form-group" *ngIf="selected.type === 'text'">
+        <td><label for="text-label-position">Label Position</label></td>
+        <td><select class="form-control" id="text-label-position" name="text-label-position" [(ngModel)]="selected.labelPosition" (ngModelChange)="onChange(0)">
+          <option value="top">Top</option>
+          <option value="right">Right</option>
+          <option value="bottom">Bottom</option>
+          <option value="left">Left</option>
+        </select></td>
+      </tr>
+
+      <!--  Width  -->
+      <tr class="form-group">
+        <td><label for="width">Width</label></td>
+        <td><input type="text" class="form-control" id="width" name="width" [(ngModel)]="selected.width" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Height  -->
+      <tr class="form-group">
+        <td><label for="height">Height</label></td>
+        <td><input type="text" class="form-control" id="height" name="height" [(ngModel)]="selected.height" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Position Top  -->
+      <tr class="form-group">
+        <td><label for="top">Top</label></td>
+        <td><input type="text" class="form-control" id="top" name="top" [(ngModel)]="selected.top" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Position Left  -->
+      <tr class="form-group">
+        <td><label for="left">Left</label></td>
+        <td><input type="text" class="form-control" id="left" name="left" [(ngModel)]="selected.left" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Element CSS  -->
+      <tr class="form-group">
+        <td><label for="css">CSS</label></td>
+        <td><textarea type="text" class="form-control" id="css" name="css" [(ngModel)]="selected.css" (ngModelChange)="onChange(0)"></textarea></td>
+      </tr>
+      <!--  Element CSS Class  -->
+      <tr class="form-group">
+        <td><label for="cssClass">CSS Class</label></td>
+        <td><input type="text" class="form-control" id="cssClass" name="cssClass" [(ngModel)]="selected.cssClass" (ngModelChange)="onChange(0)"></td>
+      </tr>
+      <!--  Active  -->
+      <tr class="form-group">
+        <td><label for="active_updateForm">Active</label></td>
+        <td>
+          <input type="checkbox" class="form-check-input" id="active_updateForm" name="active_updateForm" [(ngModel)]="selected.active" (ngModelChange)="onChange(0)">
+          <label class="form-check-label" for="active_updateForm">Active</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button" class="btn" (click)="removeController($event, selected)">Delete</button>
+        </td>
+        <td class="text-right">
+          <button type="submit" class="btn">Done</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </form>
+</div>

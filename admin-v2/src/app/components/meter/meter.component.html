@@ -1,0 +1,15 @@
+<ng-container *ngIf="item">
+  <div class="slider-container" [ngClass]="{'vertical': item.vertical}" [style]="getStyle()">
+    <div class="control" [ngClass]="{'vertical': item.vertical}">
+      <div class="fader" [ngClass]="{'vertical': item.vertical}">
+        <!--        <div>{{ value }}</div>-->
+<!--        <input class="range" type="range" #slider disabled="disabled" [min]="item.min" [max]="item.max" [value]="item.current_value">-->
+        <div class="range" [ngClass]="{'danger': percentage(item.current_value) >= dangerLevel && allowDanger }">
+          <div class="level" [style]="'width: ' + percentage(item.current_value) + '%'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+

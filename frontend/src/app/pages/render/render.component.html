@@ -1,0 +1,19 @@
+<div class="content-container">
+  <div class="loading card-color" style="text-align:center;position:relative;top:120px;" *ngIf="loading"><h1>Loading...</h1></div>
+
+  <app-no-controller *ngIf="!loading && (!controllers || controllers.length === 0)"></app-no-controller>
+
+  <div class="main-container">
+    <div *ngFor="let item of controllers" class="item-container" [ngClass]="getClasses(item)" [style]="getProperties(item)">
+      <div class="drag-controller">
+        <app-label *ngIf="item.type === 'label'" [item]="item"></app-label>
+        <app-slider *ngIf="item.type === 'fader'" [item]="item" (change)="update($event)"></app-slider>
+        <app-button *ngIf="item.type === 'button'" [item]="item"></app-button>
+        <app-meter *ngIf="item.type === 'meter'" [item]="item"></app-meter>
+        <app-image *ngIf="item.type === 'image'" [item]="item"></app-image>
+        <app-page-item *ngIf="item.type === 'page'" [item]="item"></app-page-item>
+        <!--<button class="test-btn" *ngIf="item.type === 'fader'" (click)="randomValue(item, 0, 65535)">DO</button>-->
+      </div>
+    </div>
+  </div>
+</div>

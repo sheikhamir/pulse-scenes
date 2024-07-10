@@ -1,0 +1,5 @@
+<div [class]="containerClass">
+  <div class="skeleton" *ngFor="let i of createRange(items)" [style]="'opacity: calc(1 - ' + (i * 1.75) + ' * 0.1)'">
+    <div class="frame"></div>
+  </div>
+</div>

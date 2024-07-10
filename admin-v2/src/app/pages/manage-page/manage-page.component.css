@@ -1,0 +1,79 @@
+.main-container {}
+.main-container .item-container {position:absolute;display:inline-block;box-sizing:border-box;border:none;overflow:hidden;}
+.main-container .item-container * {box-sizing: border-box;}
+.main-container .item-container:after {display:block;content:"";position:relative;margin-top:80px;width:100%;border:none;visibility:hidden;}
+.main-container .item-container > *:not(.resize-handle, .resize-corner) {display:block;width:100%;height:100%;}
+
+.content-container {position:relative;top:0;}
+
+.drag-controller {position:absolute;display:flex;}
+.drag-controller > * {width:100%;height:100%;}
+.drag-controller:after {
+  display:block;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+
+
+.resize-handle-top,
+.resize-handle-bottom {
+  position: absolute;
+  height: 2px !important;
+  cursor: row-resize;
+  width: 100%;
+  z-index: 99;
+  opacity: 0;
+}
+
+.resize-handle-top {
+  top: 0;
+  border-top: 3px dashed #CCC;
+}
+
+.resize-handle-bottom {
+  bottom: 0;
+  border-bottom: 3px dashed #CCC;
+}
+
+.resize-handle-left,
+.resize-handle-right {
+  position: absolute;
+  height: 100%;
+  cursor: col-resize;
+  width: 2px!important;
+  z-index: 99;
+  opacity: 0;
+}
+
+.resize-handle-left {
+  left: 0;
+  border-left: 3px dashed #CCC;
+}
+
+.resize-handle-right {
+  right: 0;
+  border-right: 3px dashed #CCC;
+}
+
+.main-container .item-container:hover .resize-handle-top,
+.main-container .item-container:hover .resize-handle-bottom,
+.main-container .item-container:hover .resize-handle-left,
+.main-container .item-container:hover .resize-handle-right,
+.main-container .item-container.selected .resize-handle-top,
+.main-container .item-container.selected .resize-handle-bottom,
+.main-container .item-container.selected .resize-handle-left,
+.main-container .item-container.selected .resize-handle-right {
+  opacity: 1;
+}
+
+
+.test-btn {
+  position: absolute;
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  bottom: -60px;
+}

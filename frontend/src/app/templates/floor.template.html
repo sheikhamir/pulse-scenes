@@ -1,0 +1,37 @@
+<div class="home-btn-container">
+  <a href="#" routerLink="/home">
+    <span class="material-symbols-outlined">clear</span>
+  </a>
+</div>
+<div class="content-container">
+  <div class="logo">
+    <img src="assets/images/triple-7-logo-colored.svg" alt="Logo"/>
+  </div>
+  <h1 class="title">{{ floorTitle }}</h1>
+  <div class="menu-container">
+    <div class="item">
+      <a href="#" [routerLink]="['/audio', floor]">
+        <span class="material-symbols-outlined">settings_input_composite</span>
+        <span>Audio Source</span>
+      </a>
+    </div>
+    <div class="item">
+      <a href="#" [routerLink]="['/volume', floor]">
+        <span class="material-symbols-outlined">volume_up</span>
+        <span>Volume</span>
+      </a>
+    </div>
+    <div class="item">
+      <a href="#" [routerLink]="['/tv', floor]">
+        <span class="material-symbols-outlined">tv</span>
+        <span>Televisions</span>
+      </a>
+    </div>
+    <div class="item">
+      <a href="#" [routerLink]="['/lights', floor]">
+        <span class="material-symbols-outlined">lightbulb</span>
+        <span>Lights</span>
+      </a>
+    </div>
+  </div>
+</div>

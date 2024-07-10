@@ -1,0 +1,32 @@
+# Base image
+FROM php:7.4-fpm
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    bash \
+    nginx
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Copy application files
+COPY . /var/www/html
+
+# Configure nginx
+COPY slim.nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/sites-enabled/default
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx and php-fpm
+CMD service nginx start && php-fpm

@@ -1,0 +1,169 @@
+/* You can add global styles to this file, and also import other style files */
+@import "fonts.css";
+
+:root {
+  --sidebar-padding: 15px;
+  --padding-x1: 15px;
+
+  --primary-clr: 0, 0, 0;
+  --primary-light-clr: 34, 34, 34;
+  --primary-lighter-clr: 50, 50, 50;
+
+  --contrast-clr: 238, 238, 238;
+
+  --primary: rgb( var(--primary-clr) );
+  --primary40: rgba( var(--primary-clr), 0.4 );
+  --primary60: rgba( var(--primary-clr), 0.6 );
+  --primary80: rgba( var(--primary-clr), 0.8 );
+
+  --contrast: rgb( var(--contrast-clr) );
+  --contrast40: rgba( var(--contrast-clr), 0.4 );
+  --contrast60: rgba( var(--contrast-clr), 0.6 );
+  --contrast80: rgba( var(--contrast-clr), 0.8 );
+
+  --primary-light: rgb( var(--primary-light-clr) );
+  --primary-light40: rgba( var(--primary-light-clr), 0.4 );
+  --primary-light60: rgba( var(--primary-light-clr), 0.6 );
+  --primary-light80: rgba( var(--primary-light-clr), 0.8 );
+
+  --primary-lighter: rgb( var(--primary-lighter-clr) );
+  --primary-lighter40: rgba( var(--primary-lighter-clr), 0.4 );
+  --primary-lighter60: rgba( var(--primary-lighter-clr), 0.6 );
+  --primary-lighter80: rgba( var(--primary-lighter-clr), 0.8 );
+
+  --fontsize: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*:focus-visible {
+  outline: none;
+}
+
+html, body {
+  font-family: "Century Gothic", serif;
+  padding: 0;
+  margin: 0;
+  font-size: var(--fontsize);
+}
+
+/*body {*/
+/*  background: #000 url("src/assets/images/bg.jpg") center center no-repeat;*/
+/*  min-height: 100vh;*/
+/*}*/
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.f-center {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+}
+
+.vh100 {
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+}
+
+.container > div {
+  flex: 1 1 auto;
+}
+
+.container .sidenav {
+  max-width: 200px;
+}
+
+.container .sidenav {
+  display: flex;
+  flex-direction: column;
+  background: var(--primary);
+  color: var(--contrast);
+  align-items: start;
+}
+
+.container .sidenav .control {
+  height: fit-content;
+  display: block;
+  width: 100%;
+}
+
+.container .sidenav .control .add-btn {
+  background: transparent;
+  border: 4px dashed var(--primary-light);
+  border-radius: 8px;
+  padding: 0;
+  height: 50px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin: 0 var(--padding-x1) calc(var(--padding-x1) * 2);
+  width: calc(100% - (var(--padding-x1) * 2));
+  color: var(--primary-light);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .2s all;
+}
+
+.container .sidenav .control .add-btn:hover {
+  color: var(--contrast60);
+  border-color: var(--contrast60);
+}
+
+.container .sidenav a {
+  color: var(--contrast);
+  text-decoration: none;
+  /*padding: var(--sidebar-padding);*/
+  height: 50px;
+  vertical-align: center;
+  padding: 0 var(--sidebar-padding);
+  width: calc(100%);
+  display: flex;
+  align-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: .2s all;
+}
+
+.container .sidenav > a:after {
+  content: "";
+  border-top: 1px solid rgba(40,40,40,.9);
+  width: calc(100% - (var(--sidebar-padding) * 2));
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: var(--sidebar-padding);
+}
+
+.container .sidenav > a:last-child:after {
+  display: none;
+  content: unset;
+}
+
+.container .sidenav a:hover {
+  background: var(--primary-lighter60);
+}
+
+.container .sidenav a.active {
+  background: var(--primary-lighter80);
+}
+.container .sidenav a.contextMenu {
+  background: var(--primary-light);
+}
+
+.container .page-setting {
+  padding: 15px;
+}

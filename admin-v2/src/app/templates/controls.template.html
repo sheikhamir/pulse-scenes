@@ -1,0 +1,32 @@
+<div class="home-btn-container">
+  <a href="#" [routerLink]="['/home']">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </a>
+</div>
+<div class="logo">
+  <img src="assets/images/triple-7-logo-colored.svg" alt="Logo"/>
+</div>
+<div class="content-container">
+  <div class="loading card-color" style="text-align:center;position:relative;top:120px;" *ngIf="loading"><h1>Loading...</h1></div>
+
+  <app-no-controller *ngIf="!loading && (!controllers || controllers.length === 0)"></app-no-controller>
+
+  <div class="main-container">
+    <div cdkDrag (cdkDragMoved)="onDragMoved($event)"
+         *ngFor="let item of controllers" class="item-container" [ngClass]="{'absolute': item.top}" [style]="(item.top?'top:'+item.top+';':'') + (item.left?'left:'+item.left+';':'')+(item.right?'right:'+item.right+';':'')+(item.width?'width:'+item.width+';':'')+(item.height?'height:'+item.height+';':'')" tabindex="-1">
+      <h1 *ngIf="item.type === 'label' && item.labelTag === 'h1'" (click)="clicked($event, item)" class="{{ item.labelJustify ? item.labelJustify : 'left' }}">{{ item.label }}</h1>
+      <h2 *ngIf="item.type === 'label' && item.labelTag === 'h2'" (click)="clicked($event, item)" class="{{ item.labelJustify ? item.labelJustify : 'left' }}">{{ item.label }}</h2>
+      <app-fader *ngIf="item.type === 'fader'" [item]="item" (click)="clicked($event, item)"></app-fader>
+      <app-button *ngIf="item.type === 'button'" [item]="item" (click)="clicked($event, item)"></app-button>
+      <app-meter *ngIf="item.type === 'meter'" [item]="item" (click)="clicked($event, item)"></app-meter>
+      <app-page-item *ngIf="item.type === 'page'" [item]="item"></app-page-item>
+      <div class="divider" *ngIf="item.type === 'divider'"></div>
+    </div>
+<!--    <div *ngFor="let item of pages" class="item e" [ngClass]="{'disabled': !item.active}">-->
+<!--      <a href="#" [routerLink]="['/page/' + item.id]">-->
+<!--        <span class="material-symbols-outlined">{{ item.icon }}</span>-->
+<!--        <span [innerHTML]="item.title"></span>-->
+<!--      </a>-->
+<!--    </div>-->
+  </div>
+</div>

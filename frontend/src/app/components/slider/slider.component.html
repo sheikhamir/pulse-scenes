@@ -1,0 +1,9 @@
+<div class="slider-container" [ngClass]="{ 'vertical': item.vertical && item.vertical === true }" [style]="getStyle()">
+  <div class="slider-track" (mousemove)="movement()" (mousedown)="mouseDown($event)" #track>
+    <span class="slider-overlay" [style]="sliderOverlayStyle()"></span>
+    <span cdkDragBoundary=".slider-track" #seeker
+          cdkDrag [cdkDragFreeDragPosition]="dragPosition"
+          (cdkDragMoved)="onSlideMove($event, item)" (cdkDragEnded)="onSlideEnd($event, item)"
+          class="slider-thumb"></span>
+  </div>
+</div>

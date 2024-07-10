@@ -1,0 +1,14 @@
+*.pyc
+*.o
+*.so
+.project
+.pydevproject
+target.cfg
+target.cfg.d
+.tox
+venv/
+.idea/
+
+build/
+dist/
+*.egg-info

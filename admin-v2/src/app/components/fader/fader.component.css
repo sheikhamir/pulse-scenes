@@ -1,0 +1,116 @@
+.slider-container {
+  width: 100%;
+  height: 100%;
+}
+
+/*.slider-container .control .vertical {*/
+/*  height: 350px;*/
+/*}*/
+
+/*.slider.vertical {*/
+/*  -webkit-appearance: slider-vertical;*/
+/*  -moz-appearance: slider-vertical;*/
+/*  appearance: slider-vertical;*/
+/*  width: auto;*/
+/*  height: auto;*/
+/*}*/
+
+.control {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.fader {
+  position: relative;
+  /*border: 1px solid red;*/
+  display: block;
+  width: 100%;
+  height: 100%;
+  /*background: red;*/
+  /*transform: rotate(-90deg);*/
+}
+
+/*.fader.vertical {*/
+/*  transform: rotate(-90deg);*/
+/*  top: calc(350px / 2 - 19px);*/
+/*  !*left: calc(-350px / 3 + (36px / 4));*!*/
+/*  left: -155px;*/
+/*}*/
+
+/*.more .fader.vertical {*/
+/*  top: calc(350px / 2 - 18px);*/
+/*  left: calc(-350px / 2 + 50%);*/
+/*}*/
+
+.range {
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  /*background: #52473b;*/
+  background: #313131;
+  border: 1px solid #060606;
+  overflow: hidden;
+  outline: none;
+  /*border-radius: 20px;*/
+  box-shadow: inset 0 0 5px #060606;
+  display: flex;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  min-height: 100%;
+  /*aspect-ratio: 1/1;*/
+  border-radius: 100%;
+  background: red;
+  border: 1px solid green;
+  position: relative;
+  box-shadow: -415px 0 0 400px var(--theme-main);
+}
+
+.label {
+  position: relative;
+  text-align: center;
+  background: #e1e1e1;
+  color: #060606;
+  padding: 8px;
+  white-space: nowrap;
+  border-radius: 4px;
+}
+
+.label.bottom {
+  margin-top: 10px;
+  top: 50px;
+  width: 200%;
+}
+
+.label.top {
+  margin-bottom: 15px;
+  min-width: 105px;
+  width: fit-content;
+}
+
+.label.no-meter {
+  left: 20px;
+  transform: translateX(-50%);
+}
+
+.level {
+  position: absolute;
+  left: -8px;
+  /*bottom: -41px;*/
+  margin-top: 15px;
+  display: inline-block;
+  font-size: .8rem;
+  background: #e1e1e1;
+  color: #000;
+  /*backdrop-filter: blur(2px);*/
+  padding: 8px 0;
+  width: 60px;
+  text-align: center;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  font-family: "Century Gothic", serif;
+}

@@ -1,0 +1,23 @@
+.no-controller {
+  text-align: center;
+  min-height: calc(100vh - 135px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #CCC;
+}
+
+.no-controller > .icon {
+  font-size: 6rem;
+}
+
+.no-controller > .icon > * {
+  font-size: inherit;
+}
+
+.no-controller > .msg {
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+}

@@ -1,0 +1,58 @@
+.home-btn-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.home-btn-container > a {
+  text-decoration: none;
+  color: var(--theme-secondary);
+  background: rgb(0,0,0);
+  background: radial-gradient(circle, rgba(0,0,0,1) 19%, rgba(255,0,0,0) 62%);
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
+  backdrop-filter: blur(10px);
+  border-radius: 100%;
+}
+
+.logo {
+  position: absolute;
+  height: 90px;
+  top: 8px;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  height: 100%;
+}
+
+.home-btn-container > a > span {
+  font-size: 60px;
+}
+
+/*.main-container {display:flex;width:100%;overflow:auto;padding:1rem 0;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;gap:20px;}*/
+/*.main-container .item-container {align-items: center;width:calc(100% / 5 - 20px);text-align:center;align-content:center;}*/
+
+.main-container {position:relative;}
+.main-container .item-container {position:relative;display:inline-block;}
+.main-container .item-container.absolute {position:absolute;}
+.main-container .item-container.absolute:after {display:block;content:"";position:relative;margin-top:80px;width:100%;border-bottom:1px solid transparent;visibility:hidden;}
+
+.main-container .item-container > * {display:flex;width:100%;height:100%;}
+.main-container .item-container > h1,
+.main-container .item-container > h2  {padding:0;margin:0;font-weight:normal;}
+.main-container .item-container > h1.left,
+.main-container .item-container > h2.left {align-content:start;align-items:start;justify-content:left;text-align:left;}
+.main-container .item-container > h1.center,
+.main-container .item-container > h2.center {align-content:center;align-items:center;justify-content:center;text-align:center;}
+.main-container .item-container > h1.right,
+.main-container .item-container > h2.right {align-content:end;align-items:end;justify-content:right;text-align:right;}
+
+.content-container {position:relative;top:0;}

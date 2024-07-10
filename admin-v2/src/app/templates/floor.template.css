@@ -1,0 +1,82 @@
+.home-btn-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.home-btn-container > a {
+  text-decoration: none;
+  color: var(--theme-main);
+  background: #000;
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
+}
+
+.home-btn-container > a > span {
+  font-size: 60px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  gap: 20px;
+  text-align: center;
+  align-content: center;
+}
+
+.content-container > .logo {
+  max-height: 160px;
+}
+.content-container > .logo img {
+  height: 100%;
+}
+.content-container > h1.title {
+  padding: 0;
+  margin: 0;
+}
+.content-container > .menu-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: calc(200px * 2 + 40px);
+  align-self: center;
+}
+.content-container > .menu-container > .item {
+  flex: 1 1 100%;
+  width: 200px;
+  max-width: 200px;
+  height: 200px;
+  text-align: center;
+}
+.content-container > .menu-container > .item > a {
+  display: flex;
+  border: 1px solid #eb4e29;
+  background-image: url("../../assets/images/grunge-texture.svg");
+  background-position: 0 60px;
+  background-color: #eb4e29 !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  gap: 15px;
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.content-container > .menu-container > .item > a > span:first-child {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+h2 {color: var(--theme-main);font-weight: normal;}
