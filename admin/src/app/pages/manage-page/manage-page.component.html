@@ -1,4 +1,4 @@
-<div class="content-container">
+<div class="content-container" appFileDrop (fileDropped)="onFileDropped($event)">
   <div class="loading card-color" style="text-align:center;position:relative;top:120px;" *ngIf="loading"><h1>Loading...</h1></div>
 
   <app-no-controller *ngIf="!loading && (!controllers || controllers.length === 0)"></app-no-controller>

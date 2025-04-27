@@ -29,6 +29,7 @@ import { MeterFormComponent } from './components/admin/forms/meter-form/meter-fo
 import { ButtonFormComponent } from './components/admin/forms/button-form/button-form.component';
 import { TextFormComponent } from './components/admin/forms/text-form/text-form.component';
 import { PageCssComponent } from './components/page-css/page-css.component';
+import { FileDropDirective } from './directives/file-drop.directive';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { PageCssComponent } from './components/page-css/page-css.component';
     ButtonFormComponent,
     TextFormComponent,
     PageCssComponent,
+    FileDropDirective,
   ],
   imports: [
     BrowserModule,

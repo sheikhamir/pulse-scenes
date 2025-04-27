@@ -176,7 +176,7 @@ export class SliderComponent implements AfterViewInit, OnChanges   {
       realPosition += this.slider.seeker.width / 2 - this.slider.seeker.width / 20;
     }
     // console.log(this.slider.value);
-    console.log(realPosition);
+    //console.log(realPosition);
     return this.item.vertical ? `top:${realPosition}px` : `left:${realPosition}px`;
   }
 

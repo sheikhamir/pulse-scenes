@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Renderer2, HostListener, ElementRef } from '@angular/core';
 import { Controller, Button, Fader, Icon, Image, Label, Meter, Text, CSS } from "src/interfaces/Controller";
 import { Page } from "src/interfaces/Page";
 import { ActivatedRoute } from "@angular/router";
@@ -10,9 +10,10 @@ import { Observable, of } from "rxjs";
 import { CdkDragDrop, CdkDragEnd, CdkDragRelease } from "@angular/cdk/drag-drop";
 import { ResizeEvent } from 'angular-resizable-element';
 import { Helpers } from "src/app/helpers";
+import { FileDropDirective } from "src/app/directives/file-drop.directive";
 
 @Component({
-  selector: 'app-audio-input',
+  selector: 'app-manage-page',
   templateUrl: './manage-page.component.html',
   styleUrls: ['./manage-page.component.css']
 })
@@ -45,7 +46,8 @@ export class ManagePageComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private api: ApiService,
     private dataService: DataService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {
     if (this.activeRoute.snapshot.params['id']) {
       this.apiOptions.pageId = this.activeRoute.snapshot.params['id'];
@@ -290,6 +292,65 @@ export class ManagePageComponent implements OnInit {
 
     // Append <style> element to the <head> of the document
     // this.renderer.appendChild(document.head, styleElement);
+  }
+
+  files: any[] = [];
+  onFileDropped(files: FileList) {
+    const validFiles: File[] = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.type.startsWith('image/') && file.size <= 5000000) { // Example: only accept image files under 5MB
+        validFiles.push(file);
+      } else {
+        console.error('Invalid file:', file.name);
+      }
+    }
+
+    if (validFiles.length > 0) {
+      this.processFiles(validFiles);
+    }
+  }
+
+  processFiles(files: File[]) {
+    for (let file of files) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const fileData = {
+          name: file.name,
+          type: file.type,
+          url: e.target.result,
+          position: { x: 0, y: 0 }
+        };
+        this.files.push(fileData);
+        this.uploadFile(file);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  uploadFile(file: File) {
+    console.log("File upload");
+    console.log("File:", file);
+    // this.fileUploadService.uploadFile(file).subscribe(response => {
+    //   console.log('File uploaded successfully', response);
+    // }, error => {
+    //   console.error('Error uploading file', error);
+    // });
+  }
+
+  @HostListener('document:drop', ['$event']) onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('Drop detected in component');
+    const boundingRect = document.body.getBoundingClientRect();
+    const x = event.clientX - boundingRect.left;
+    const y = event.clientY - boundingRect.top;
+
+    console.log("Coordinates: ", x, y);
+
+    if (this.files.length > 0) {
+      this.files[this.files.length - 1].position = { x, y };
+    }
   }
 
   applyCSS(item: CSS) {
