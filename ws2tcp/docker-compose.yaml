@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  websocket-server:
+    build:
+      context: .
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8300:8300"
