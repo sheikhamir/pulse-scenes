@@ -73,4 +73,6 @@ Thumbs.db
 /wrapper/.idea
 /wrapper/.vscode
 
+/ws2tcp/venv/
+
 *-ignore
